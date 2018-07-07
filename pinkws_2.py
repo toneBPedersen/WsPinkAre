@@ -47,10 +47,6 @@ song_low = rev_songs_low.iloc[-3,:]
 song_mid = rev_songs_mid.iloc[-3,:]
 song_high = rev_songs_high.iloc[-3,:]
 
-song_low.plot()
-song_mid.plot()
-song_high.plot()
-
 x_axis = rev_songs.columns
 plt.plot(x_axis, song_low,x_axis, song_mid, x_axis, song_high)
 
@@ -58,7 +54,7 @@ plt.show()
 
 #Cleaned data with revenue for all quarters
 rev_songs_with20Q = rev_songs[tot_master_df.iloc[:,24]==20]
-tot_rev_with20Q = rev_songs.loc[rev_songs_with20Q.index]
+tot_rev_with20Q = tot_rev[rev_songs_with20Q.index]
 
 #Find the low, mid, high quantile
 q10_with20Q = tot_rev_with20Q.quantile(0.1)
@@ -74,21 +70,49 @@ rev_songs_low_with20Q = rev_songs_with20Q.loc[tot_rev_10_with20Q.index]
 rev_songs_mid_with20Q = rev_songs_with20Q.loc[tot_rev_10_30_with20Q.index]
 rev_songs_high_with20Q = rev_songs_with20Q.loc[tot_rev_90_with20Q.index]
 
-song_low_with20Q = rev_songs_low_with20Q.iloc[-3,:]
-song_mid_with20Q = rev_songs_mid_with20Q.iloc[-3,:]
-song_high_with20Q = rev_songs_high_with20Q.iloc[-3,:]
+song_low_with20Q = rev_songs_low_with20Q.iloc[-1,:]
+song_mid_with20Q = rev_songs_mid_with20Q.iloc[-1,:]
+song_high_with20Q = rev_songs_high_with20Q.iloc[-5,:]
 
-song_low.plot()
-song_mid.plot()
-song_high.plot()
+song_low_with20Q.plot()
 
 x_axis = rev_songs.columns
 plt.plot(x_axis, song_low_with20Q,x_axis, song_mid_with20Q, x_axis, song_high)
 
 plt.show()
 
+#hitta en pop succe: 
+pop_hit = rev_songs.loc[23778758]
+pop_soul = rev_songs.loc[19751504]
+
+pop_hit.plot()
+pop_soul.plot()
+
+plt.show()
+
+pop_hit_noZero =np.trim_zeros(pop_hit)
+
+N = len(pop_hit)- len(pop_hit_noZero)
+pop_hit_pad =np.pad(pop_hit_noZero, (0,N), 'constant')
+
+plt.plot(x_axis, pop_hit_pad,x_axis, pop_soul)
+plt.show()
+
 #Accumulated data
-# acc_master_df = rev_songs/rev_songs.sum()
+
+acc_master_df = rev_songs/rev_songs.sum()
+pop_hit_acc = acc_master_df.loc[23778758]
+pop_soul_acc = acc_master_df.loc[19751504]
+
+# Add a line showing the expected distribution.
+pop_hit_cum = pop_hit_pad.cumsum()/pop_hit.sum()
+pop_soul_cum = pop_soul.cumsum()/pop_soul.sum()
+
+plt.plot(x_axis, pop_hit_cum,x_axis, pop_soul_cum)
+plt.show()
+
+plt.plot(x_axis, pop_hit_acc,x_axis, pop_soul_acc)
+plt.show()
 
 # acc_mid = acc_master_df.iloc[median_mid]
 
