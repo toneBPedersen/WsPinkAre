@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 #read data
 
-tot_master_df = pd.read_excel('Song_rev.xlsx', header=1, index = )
+tot_master_df = pd.read_excel('Song_rev.xlsx', header=1)
 
 #Slice data set
 
