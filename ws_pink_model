@@ -1,6 +1,0 @@
-#AR model, what do I want to model? time series, try to model all time series, use df_master.transpose()
-
-tot_master_df_1 = pd.read_excel('output_to_15000.xlsx')
-tot_master_df_2 = pd.read_excel('output_from_15001.xlsx')
-
-tot_master_df = tot_master_df_1.append(tot_master_df_2)
