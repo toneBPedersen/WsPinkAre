@@ -2,21 +2,21 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import matplotlib.cm as cm
+
 
 #read data 
 
-tot_master_df = pd.read_excel('Song_rev.xlsx', header=1)
+tot_master_df = pd.read_excel('Song_rev_no_name.xlsx', header=1)
 
 #NR 1: Slice data set
 #Get all songs that have more than 10 quarters 
 
 #Get all songs per quarter
-rev_songs = tot_master_df.iloc[:,3:22]
+rev_songs = tot_master_df.iloc[:,1:20]
 #Get all songs tot revenue
-tot_rev= tot_master_df.iloc[:,23]
+tot_rev= tot_master_df.iloc[:,21]
 #Get all songs that have more than 10 quarters 
-songs_above_10Q = tot_master_df.iloc[:,24][tot_master_df.iloc[:,24]>10]
+songs_above_10Q = tot_master_df.iloc[:,22][tot_master_df.iloc[:,22]>10]
 
 #NR 2: Calculate mean median and max revenue
 
